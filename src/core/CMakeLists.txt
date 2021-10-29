@@ -1,5 +1,3 @@
-find_package(spdlog REQUIRED)
-
 if (ENABLE_VULKAN)
 find_package(Vulkan REQUIRED)
 endif(ENABLE_VULKAN)

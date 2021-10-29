@@ -31,7 +31,7 @@ THE SOFTWARE.
 
 namespace
 {
-static constexpr char* kKernelPath = "../../src/core/src/vlk/kernels/";
+static constexpr const char* kKernelPath = "../../src/core/src/vlk/kernels/";
 #ifdef RR_EMBEDDED_KERNELS
 std::vector<std::uint32_t> GetShaderCodeFromFile(std::string const& filename)
 {

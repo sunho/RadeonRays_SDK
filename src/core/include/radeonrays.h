@@ -24,15 +24,7 @@ THE SOFTWARE.
 #define RR_API_PATCH_VERSION 0x000001
 #define RR_API_VERSION RR_API_MAJOR_VERSION * 1000000 + RR_API_MINOR_VERSION * 1000 + RR_API_PATCH_VERSION
 
-#ifdef _WIN32
-#ifdef RR_EXPORT_API
-#define RR_API __declspec(dllexport)
-#else
-#define RR_API __declspec(dllimport)
-#endif
-#else
-#define RR_API __attribute__((visibility("default")))
-#endif
+#define RR_API ;
 
 #include <stddef.h>
 #include <stdint.h>
