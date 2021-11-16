@@ -117,6 +117,10 @@ float fast_intersect_triangle(Ray r,
         return t_max;
     }
 
+    if (dot(cross(e1,e2), r.direction) < 0.0f) {
+        return t_max;
+    }
+
     float invd = 1.0 / denom;
     vec3 d = r.origin - v1;
     float b1 = dot(d, s1) * invd;

@@ -237,6 +237,7 @@ void main()
             }
             else
             {
+                
                 float t = fast_intersect_triangle(ray,
                                                   node.aabb0_min_or_v0,
                                                   node.aabb0_max_or_v1,
