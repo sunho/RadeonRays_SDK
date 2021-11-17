@@ -71,6 +71,8 @@ public:
      **/
     size_t GetScratchDataSize(uint32_t size) const;
 
+    void ResetDescriptorSet();
+
 private:
     void AdjustLayouts(uint32_t size) const;
     void UpdateDescriptors(vk::Buffer     input_keys,

@@ -365,6 +365,12 @@ size_t BuildHlBvhTopLevel::GetScratchDataSize(uint32_t instance_count) const
     return impl_->scratch_layout_.total_size();
 }
 
+void BuildHlBvhTopLevel::freeDescriptorSets()
+{
+    impl_->cache_.Reset();
+    impl_->radix_sort_.ResetDescriptorSet();
+}
+
 void BuildHlBvhTopLevel::AdjustLayouts(uint32_t instance_count) const
 {
     if (instance_count == impl_->current_instance_count_)

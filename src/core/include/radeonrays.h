@@ -464,6 +464,8 @@ RR_API RRError rrReleaseDevicePtr(RRContext context, RRDevicePtr ptr);
  */
 RR_API RRError rrReleaseExternalCommandStream(RRContext context, RRCommandStream command_stream);
 
+void rrFreeDescriptorSets(RRContext context);
+
 #ifdef __cplusplus
 }
 #endif

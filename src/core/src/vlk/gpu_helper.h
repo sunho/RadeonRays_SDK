@@ -39,8 +39,8 @@ static constexpr auto VK_VENDOR_ID_INTEL  = 0x8086;
 
 struct GpuHelper
 {
-    static auto constexpr kNumDescriptors = 1000000u;
-    static auto constexpr kMaxSets        = 1000000u;
+    static auto constexpr kNumDescriptors = 4000000u;
+    static auto constexpr kMaxSets        = 4000000u;
 
     GpuHelper(vk::Device         dev,
               vk::PhysicalDevice ph_dev,

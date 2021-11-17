@@ -348,6 +348,10 @@ size_t Scan::GetScratchDataSize(std::uint32_t num_keys) const
     return impl_->scratch_layout_.total_size();
 }
 
+void Scan::ResetDescriptorSet() { 
+    impl_->cache_.Reset();
+}
+
 void Scan::AdjustLayouts(uint32_t num_keys) const
 {
     if (impl_->num_keys_ == num_keys)

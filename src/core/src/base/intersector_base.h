@@ -187,6 +187,8 @@ public:
      * @return Size of scratch buffer.
      */
     virtual size_t GetTraceMemoryRequirements(uint32_t ray_count) = 0;
+
+    virtual void FreeDescriptorSets() = 0;
 };
 
 template<BackendType type>

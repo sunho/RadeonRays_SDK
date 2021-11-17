@@ -343,6 +343,12 @@ size_t RadixSortKeyValue::GetScratchDataSize(uint32_t size) const
     return impl_->scratch_layout_.total_size();
 }
 
+void RadixSortKeyValue::ResetDescriptorSet()
+{
+    impl_->cache_.Reset();
+    impl_->scan_.ResetDescriptorSet();
+}
+
 void RadixSortKeyValue::AdjustLayouts(uint32_t size) const
 {
     if (impl_->num_keys_ == size)

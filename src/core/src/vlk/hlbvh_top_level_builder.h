@@ -67,6 +67,9 @@ public:
      **/
     size_t GetScratchDataSize(uint32_t instance_count) const;
 
+    void freeDescriptorSets();
+
+
 private:
     void AdjustLayouts(uint32_t triangle_count) const;
     void UpdateDescriptors(vk::Buffer                   instance_descs,

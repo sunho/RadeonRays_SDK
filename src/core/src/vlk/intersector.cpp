@@ -327,4 +327,8 @@ size_t Intersector::GetTraceMemoryRequirements(uint32_t ray_count)
     return std::max<size_t>(impl_->trace_scene_.GetScratchSize(ray_count),
                             impl_->trace_geometry_.GetScratchSize(ray_count));
 }
+void Intersector::FreeDescriptorSets() { 
+    impl_->build_bvh_top_level_.freeDescriptorSets();
+    impl_->trace_scene_.FreeDescriptorSets();
+}
 }  // namespace rt::vulkan

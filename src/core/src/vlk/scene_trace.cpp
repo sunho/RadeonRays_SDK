@@ -174,6 +174,10 @@ void TraceScene::operator()(vk::CommandBuffer       command_buffer,
 
 size_t TraceScene::GetScratchSize(uint32_t ray_count) const { return sizeof(uint32_t) * kStackSize * ray_count; }
 
+void TraceScene::FreeDescriptorSets() { 
+    impl_->cache_.Reset(); 
+}
+
 vk::DescriptorSet TraceScene::GetDescriptor(RRIntersectQuery        query,
                                             RRIntersectQueryOutput  query_output,
                                             vk::Buffer              bvh,

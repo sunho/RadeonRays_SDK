@@ -53,6 +53,8 @@ public:
 
     size_t GetScratchSize(uint32_t ray_count) const;
 
+    void FreeDescriptorSets();
+
 private:
     vk::DescriptorSet GetDescriptor(RRIntersectQuery        query,
                                     RRIntersectQueryOutput  query_output,

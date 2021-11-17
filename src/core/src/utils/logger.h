@@ -81,31 +81,31 @@ private:
 template <typename... Args>
 void Logger::Info(Args&&... args)
 {
-    logger_->info(std::forward<Args>(args)...);
+    //logger_->info(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
 void Logger::Warn(Args&&... args)
 {
-    logger_->warn(std::forward<Args>(args)...);
+    //logger_->warn(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
 void Logger::Error(Args&&... args)
 {
-    logger_->error(std::forward<Args>(args)...);
+    //logger_->error(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
 void Logger::Debug(Args&&... args)
 {
-    logger_->debug(std::forward<Args>(args)...);
+    //logger_->debug(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
 void Logger::Trace(Args&&... args)
 {
-    logger_->trace(std::forward<Args>(args)...);
+    //logger_->trace(std::forward<Args>(args)...);
 }
 
 }  // namespace rt

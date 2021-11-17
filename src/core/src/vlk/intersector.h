@@ -147,6 +147,8 @@ public:
      */
     size_t GetTraceMemoryRequirements(uint32_t ray_count) override;
 
+    void FreeDescriptorSets() override;
+
 private:
     // Pimpl.
     struct IntersectorImpl;

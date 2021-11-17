@@ -734,6 +734,11 @@ RRError rrReleaseExternalCommandStream(RRContext context, RRCommandStream comman
     return RR_SUCCESS;
 }
 
+void rrFreeDescriptorSets(RRContext context) { 
+    auto ctx = reinterpret_cast<Context*>(context);
+    ctx->intersector->FreeDescriptorSets();
+}
+
 RRError rrGetTraceMemoryRequirements(RRContext context, uint32_t ray_count, size_t* scratch_size)
 {
     Logger::Get().Info("rrGetTraceMemoryRequirements");

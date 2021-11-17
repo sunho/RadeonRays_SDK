@@ -20,6 +20,8 @@ THE SOFTWARE.
 #include <array>
 #include <unordered_map>
 #include <vector>
+#include <list>
+#include <iostream>
 
 #include "vlk/vulkan_wrappers.h"
 
@@ -88,6 +90,8 @@ struct ChildrenBvhsDesc
     ChildrenBvhsContainer buffers;
 };
 
+constexpr static size_t DESCRIPTOR_CACHE_SIZE = 256;
+
 template <size_t BufSize, size_t DescSize>
 class DescriptorCacheTable
 {
@@ -108,31 +112,49 @@ class DescriptorCacheTable
             return res;
         }
     };
-
-    std::unordered_map<std::array<vk::Buffer, BufSize>, std::array<vk::DescriptorSet, DescSize>, BuffersHash>
-                               cache_table;
+    using List =  std::list<std::array<vk::DescriptorSet, DescSize>>;
+    List                 cache_items;
+    std::unordered_map<std::array<vk::Buffer, BufSize>, typename List::iterator, BuffersHash> cache_table;
     std::shared_ptr<GpuHelper> gpu_helper;
 
 public:
     DescriptorCacheTable(std::shared_ptr<GpuHelper> helper) : gpu_helper(helper) {}
     ~DescriptorCacheTable()
     {
-        for (const auto& pair : cache_table)
+        for (const auto& pair : cache_items)
         {
-            for (const auto& descriptor : pair.second)
+            for (const auto& descriptor : pair)
             {
                 gpu_helper->device.freeDescriptorSets(gpu_helper->descriptor_pool, {descriptor});
             }
         }
     }
+
+    void Reset()
+    {
+        while (cache_items.size() > DESCRIPTOR_CACHE_SIZE)
+        {
+            for (const auto& descriptor : cache_items.back())
+            {
+                gpu_helper->device.freeDescriptorSets(gpu_helper->descriptor_pool, {descriptor});
+            }
+            cache_items.pop_back();
+        }
+    }
     bool Contains(const std::array<vk::Buffer, BufSize>& key) { return cache_table.count(key); }
     std::array<vk::DescriptorSet, DescSize> Get(const std::array<vk::Buffer, BufSize>& key)
     {
-        return cache_table.at(key);
+
+        return *cache_table.at(key);
     }
     void Push(std::array<vk::Buffer, BufSize> key, std::array<vk::DescriptorSet, DescSize> value)
     {
-        cache_table[key] = value;
+        if (cache_items.size() > DESCRIPTOR_CACHE_SIZE)
+        {
+            std::cout << "rrr" << std::endl;
+        }
+        cache_items.push_front(value);
+        cache_table[key] = cache_items.begin();
     }
 };
 }  // namespace rt::vulkan
