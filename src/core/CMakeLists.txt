@@ -153,28 +153,10 @@ if (ENABLE_VULKAN)
             src/vlk/scan.cpp)
     source_group(vk\\algorithms FILES ${VK_ALGO})
 
-    set(VK_SPIRV
-            src/vlk/spirv_tools/spirv_cross.cpp
-            src/vlk/spirv_tools/spirv_parser.cpp
-            src/vlk/spirv_tools/spirv_cross_parsed_ir.cpp
-            src/vlk/spirv_tools/spirv_cfg.cpp
-            src/vlk/spirv_tools/spirv_cross_c.cpp
-            src/vlk/spirv_tools/spirv_glsl.cpp
-            src/vlk/spirv_tools/spirv_hlsl.cpp
-            src/vlk/spirv_tools/spirv_msl.cpp
-            src/vlk/spirv_tools/spirv_cpp.cpp
-            src/vlk/spirv_tools/spirv_reflect.cpp
-            src/vlk/spirv_tools/spirv_cross_util.cpp)
-    source_group(vk\\spirv FILES ${VK_SPIRV})
-    if (MSVC)
-        set_source_files_properties(${VK_SPIRV} PROPERTIES COMPILE_FLAGS /wd4245)
-    endif(MSVC)
-
     list(APPEND RR_SOURCES
             ${VK_WRAPPERS}
             ${VK_ALGO}
-            ${VK_INTERSECTOR}
-            ${VK_SPIRV})
+            ${VK_INTERSECTOR})
 endif(ENABLE_VULKAN)
 
 add_library(radeonrays ${RR_SOURCES})
@@ -216,6 +198,6 @@ endif(ENABLE_DX12)
 if (ENABLE_VULKAN)
     target_compile_definitions(radeonrays PRIVATE RR_ENABLE_VK)
     target_compile_definitions(radeonrays PRIVATE SPIRV_CROSS_C_API_GLSL)
-    target_link_libraries(radeonrays PRIVATE Vulkan::Vulkan)
+    target_link_libraries(radeonrays PRIVATE spirv-cross-core spirv-cross-cpp Vulkan::Vulkan)
     add_subdirectory(src/vlk/kernels ${CMAKE_CURRENT_BINARY_DIR}/vlk_kernels_project_files)
 endif(ENABLE_VULKAN)

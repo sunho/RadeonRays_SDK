@@ -24,7 +24,7 @@ THE SOFTWARE.
 
 // clang-format off
 #include "utils/warning_push.h"
-#include "vlk/spirv_tools/spirv_glsl.hpp"
+#include <spirv_cross/spirv_glsl.hpp>
 #include <vulkan/vulkan.hpp>
 #include "utils/warning_ignore_general.h"
 #include "utils/warning_pop.h"
